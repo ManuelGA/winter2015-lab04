@@ -35,12 +35,14 @@ class Order extends Application {
     function display_menu($order_num = null) {
         if ($order_num == null)
             redirect('/order/neworder');
-
-        $this->data['pagebody'] = 'show_menu';
-        $this->data['order_num'] = $order_num;          
-        $this->data['title'] = 'Order # '.$order_num;
         
         $order = $this->Orders->get($order_num);
+        $total = $this->Orders->total($order_num);
+        $this->data['pagebody'] = 'show_menu';
+        $this->data['order_num'] = $order_num;          
+        $this->data['title'] = 'Order # '.$order_num.' ('.$total.')';
+        
+        
         
         // Make the columns
         
@@ -80,8 +82,10 @@ class Order extends Application {
     }
 
     // add an item to an order
-    function add($order_num, $item) {
-        //FIXME
+    function add($order_num, $item)
+    {
+        
+        $this->Orders->add_item($order_num, $item);
         redirect('/order/display_menu/' . $order_num);
     }
 
@@ -90,8 +94,10 @@ class Order extends Application {
         $this->data['title'] = 'Checking Out';
         $this->data['pagebody'] = 'show_order';
         $this->data['order_num'] = $order_num;
-        //FIXME
-
+       
+        $this->data['total'] = number_format($this->Orders->total($order_num), 2);
+        
+        $items = $this->order
         $this->render();
     }
 
