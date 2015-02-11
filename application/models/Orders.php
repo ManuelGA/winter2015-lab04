@@ -47,8 +47,9 @@ class Orders extends MY_Model {
            $result += $item->quantity * $menuitem->price;
        }
        
+       //used originnaly but to update the amount it was not working as intended
        $money_format = sprintf("$%.2f", $result);
-       return $money_format;
+       return $result;
     }
 
     // retrieve the details for an order

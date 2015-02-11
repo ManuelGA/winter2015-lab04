@@ -40,7 +40,7 @@ class Order extends Application {
         $total = $this->Orders->total($order_num);
         $this->data['pagebody'] = 'show_menu';
         $this->data['order_num'] = $order_num;          
-        $this->data['title'] = 'Order # '.$order_num.' ('.$total.')';
+        $this->data['title'] = 'Order # '.$order_num.' ('.sprintf("$%.2f", $total).')';
         
         
         
@@ -94,8 +94,8 @@ class Order extends Application {
         $this->data['title'] = 'Checking Out';
         $this->data['pagebody'] = 'show_order';
         $this->data['order_num'] = $order_num;
-       
-        $this->data['total'] = $this->Orders->total($order_num);
+        $total = $this->Orders->total($order_num);
+        $this->data['total'] = sprintf("$%.2f", $total);
         
         $items = $this->Orderitems->group($order_num);
         foreach($items as $item)
