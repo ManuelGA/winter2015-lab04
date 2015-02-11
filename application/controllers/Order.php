@@ -95,9 +95,15 @@ class Order extends Application {
         $this->data['pagebody'] = 'show_order';
         $this->data['order_num'] = $order_num;
        
-        $this->data['total'] = number_format($this->Orders->total($order_num), 2);
+        $this->data['total'] = $this->Orders->total($order_num);
         
-        $items = $this->order
+        $items = $this->Orderitems->group($order_num);
+        foreach($items as $item)
+        {
+            $menuitem = $this->Menu->get($item->item);
+            $item->code = $menuitem->name;
+        }
+        $this->data['items'] = $items;
         $this->render();
     }
 
