@@ -18,11 +18,21 @@ class Orders extends MY_Model {
     }
 
     // calculate the total for an order
-    function total($num) {
+    function total($num)
+    {
        $CI = &get_instance();
-       $CI->load>model('OrderItems');
+       $CI->load->model('OrderItems');
        
+       $items = $this->OrderItems->some('order', $num);
        
+       $result = 0;
+       foreach($items as $item)
+       {
+           $menuitem = $this->Menu->get($item->item);
+           $results = $item->quantity * $menuitem->price;
+       }
+       
+       return $result;
     }
 
     // retrieve the details for an order
