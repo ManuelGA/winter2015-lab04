@@ -38,6 +38,7 @@ class Order extends Application {
         
         $order = $this->Orders->get($order_num);
         $total = $this->Orders->total($order_num);
+        
         $this->data['pagebody'] = 'show_menu';
         $this->data['order_num'] = $order_num;          
         $this->data['title'] = 'Order # '.$order_num.' ('.sprintf("$%.2f", $total).')';
@@ -91,6 +92,7 @@ class Order extends Application {
 
     // checkout
     function checkout($order_num) {
+        
         $this->data['title'] = 'Checking Out';
         $this->data['pagebody'] = 'show_order';
         $this->data['order_num'] = $order_num;
@@ -103,6 +105,7 @@ class Order extends Application {
             $menuitem = $this->Menu->get($item->item);
             $item->code = $menuitem->name;
         }
+        //validation
         $this->data['okornot'] = $this->Orders->validate($order_num);
         $this->data['items'] = $items;
         $this->render();

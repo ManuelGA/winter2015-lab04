@@ -32,7 +32,7 @@ class Welcome extends Application {
             $this1 = array(
                 'num' => $order->num,
                 'datetime' => $order->date,
-                'amount' => '$'.$order->total
+                'amount' => '$'.$order->total //added $ symbol
             );
             $orders[] = $this1;
         }

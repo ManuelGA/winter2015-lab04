@@ -18,12 +18,14 @@ class Orders extends MY_Model {
         $CI = &get_instance();
         if($CI->Orderitems->exists($num, $code))
         {
+            //adding items to a existing order
             $record = $CI->Orderitems->get($num, $code);
             $record->quantity++;
             $CI->Orderitems->update($record);
         }
         else
         {
+            //staring a new order.
             $record = $CI->Orderitems->create();
             $record->order = $num;
             $record->item = $code;
@@ -72,6 +74,7 @@ class Orders extends MY_Model {
         
         if(count($items) > 0)
         {
+            //go through all the items in the order
             foreach($items as $item)
             {
                 $menu = $CI->Menu->get($item->item);
@@ -79,6 +82,7 @@ class Orders extends MY_Model {
             }
         }
         
+        // if the order has an item from every category
         return isset($goten['m']) && isset($goten['d']) && isset($goten['s']);
     }
 
