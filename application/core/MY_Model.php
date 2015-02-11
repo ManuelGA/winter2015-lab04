@@ -165,7 +165,8 @@ class MY_Model extends CI_Model implements Active_Record {
     // Create a new data object.
     // Only use this method if intending to create an empty record and then
     // populate it.
-    function create() {
+    function create()
+    {
         $names = $this->db->list_fields($this->_tableName);
         $object = new StdClass;
         foreach ($names as $name)

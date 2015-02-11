@@ -137,5 +137,5 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 
-$autoload['model'] = array('Menu', 'Orderitems', 'Orders');
+$autoload['model'] = array('Menu', 'OrderItems', 'Orders');
 $autoload['libraries'] = array('database', 'parser');

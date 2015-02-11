@@ -19,7 +19,10 @@ class Orders extends MY_Model {
 
     // calculate the total for an order
     function total($num) {
-        return 0.0;
+       $CI = &get_instance();
+       $CI->load>model('OrderItems');
+       
+       
     }
 
     // retrieve the details for an order
